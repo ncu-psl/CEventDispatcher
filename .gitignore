@@ -1,3 +1,8 @@
+# 排除無副檔名 ref:https://goo.gl/X6ee85
+*
+!/**/
+!*.*
+
 # 不追蹤 Unix 可執行檔（無副檔名的檔案，GNU Make 的 Makefile 是例外）與可執行檔常見副檔名的檔案
 !Makefile
 !*.*
