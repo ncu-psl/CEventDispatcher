@@ -7,6 +7,7 @@
 white [ \t]+
 digit [0-9]
 integer {digit}+
+operator [-+()=/*\n]
 
 %%
 
@@ -14,12 +15,4 @@ integer {digit}+
 {integer} { yylval=atoi(yytext); 
  return NUMBER;
 }
-
-"+" return PLUS;
-"-" return MINUS;
-"*" return TIMES;
-"/" return DIVIDE;
-"^" return POWER;
-"(" return LEFT;
-")" return RIGHT;
-"\n" return END;
+{operator} { return *yytext; }

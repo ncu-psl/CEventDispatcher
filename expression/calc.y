@@ -6,14 +6,14 @@
 %}
 
 %token NUMBER
-%token PLUS MINUS TIMES DIVIDE POWER
-%token LEFT RIGHT
-%token END
+%token '+' '-' '*' '/' '^'
+%token '(' ')'
+%token '\n'
 
-%left PLUS MINUS
-%left TIMES DIVIDE
+%left '+' '-'
+%left '*' '/'
 %left NEG
-%right POWER
+%right '^'
 
 %start Input
 %%
@@ -24,19 +24,19 @@ Input:
 ;
 
 Line:
-     END
-     | Expression END { printf("Result: %d\n", $1); }
+     '\n'
+     | Expression '\n' { printf("Result: %d\n", $1); }
 ;
 
 Expression:
      NUMBER { $$=$1; }
-| Expression PLUS Expression { $$=$1+$3; }
-| Expression MINUS Expression { $$=$1-$3; }
-| Expression TIMES Expression { $$=$1*$3; }
-| Expression DIVIDE Expression { $$=$1/$3; }
-| MINUS Expression %prec NEG { $$=-$2; }
-| Expression POWER Expression { $$=pow($1,$3); }
-| LEFT Expression RIGHT { $$=$2; }
+| Expression '+' Expression { $$=$1+$3; }
+| Expression '-' Expression { $$=$1-$3; }
+| Expression '*' Expression { $$=$1*$3; }
+| Expression '/' Expression { $$=$1/$3; }
+| '-' Expression %prec NEG { $$=-$2; }
+| Expression '^' Expression { $$=pow($1,$3); }
+| '(' Expression ')' { $$=$2; }
 ;
 
 %%
