@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define YYSTYPE double
+#define YYSTYPE int
 %}
 
 %token NUMBER
@@ -25,7 +25,7 @@ Input:
 
 Line:
      END
-     | Expression END { printf("Result: %f\n", $1); }
+     | Expression END { printf("Result: %d\n", $1); }
 ;
 
 Expression:

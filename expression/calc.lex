@@ -1,5 +1,5 @@
 %{
-#define YYSTYPE double
+#define YYSTYPE int
 #include "calc.tab.h"
 #include <stdlib.h>
 %}
@@ -7,13 +7,11 @@
 white [ \t]+
 digit [0-9]
 integer {digit}+
-exponent [eE][+-]?{integer}
-real {integer}("."{integer})?{exponent}?
 
 %%
 
 {white} { }
-{real} { yylval=atof(yytext); 
+{integer} { yylval=atoi(yytext); 
  return NUMBER;
 }
 
