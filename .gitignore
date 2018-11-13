@@ -26,5 +26,6 @@ a.out
 *.tab.c
 *.tab.h
 
-# 不追蹤ref
+# 不追蹤ref, output
 ref
+output
