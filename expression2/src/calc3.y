@@ -11,6 +11,7 @@
     void freeNode(nodeType *p);
     int ex(nodeType *p);
     int yylex(void);
+    void print(nodeType *p);
     
     void yyerror(char *s);
     int sym[26];                    /* symbol table */
@@ -28,38 +29,26 @@
 %nonassoc IFX
 %nonassoc ELSE
 
+%left OR AND
 %left GE LE EQ NE '>' '<'
 %left '+' '-'
 %left '*' '/'
+%nonassoc "!"
 %nonassoc UMINUS
 
-%type <nPtr> stmt expr stmt_list
+%type <nPtr> stmt expr
 
 %%
 
 program:
-        function                { exit(0); }
-        ;
-
-function:
-          function stmt         { ex($2); freeNode($2); }
+          program stmt '\n'     { printf("%d\n", ex($2)); freeNode($2); }
         | /* NULL */
         ;
 
 stmt:
-          ';'                            { $$ = opr(';', 2, NULL, NULL); }
-        | expr ';'                       { $$ = $1; }
-        | PRINT expr ';'                 { $$ = opr(PRINT, 1, $2); }
-        | VARIABLE '=' expr ';'          { $$ = opr('=', 2, id($1), $3); }
-        | WHILE '(' expr ')' stmt        { $$ = opr(WHILE, 2, $3, $5); }
-        | IF '(' expr ')' stmt %prec IFX { $$ = opr(IF, 2, $3, $5); }
-        | IF '(' expr ')' stmt ELSE stmt { $$ = opr(IF, 3, $3, $5, $7); }
-        | '{' stmt_list '}'              { $$ = $2; }
-        ;
-
-stmt_list:
-          stmt                  { $$ = $1; }
-        | stmt_list stmt        { $$ = opr(';', 2, $1, $2); }
+          expr                           { $$ = $1; }
+        | PRINT expr                     { $$ = opr(PRINT, 1, $2); }
+        | VARIABLE '=' expr              { $$ = opr('=', 2, id($1), $3); }
         ;
 
 expr:
@@ -72,6 +61,8 @@ expr:
         | expr '/' expr         { $$ = opr('/', 2, $1, $3); }
         | expr '<' expr         { $$ = opr('<', 2, $1, $3); }
         | expr '>' expr         { $$ = opr('>', 2, $1, $3); }
+        | expr AND expr         { $$ = opr(AND, 2, $1, $3); }
+        | expr OR expr          { $$ = opr(OR, 2, $1, $3); }
         | expr GE expr          { $$ = opr(GE, 2, $1, $3); }
         | expr LE expr          { $$ = opr(LE, 2, $1, $3); }
         | expr NE expr          { $$ = opr(NE, 2, $1, $3); }
@@ -142,6 +133,51 @@ void freeNode(nodeType *p) {
 
 void yyerror(char *s) {
     fprintf(stdout, "%s\n", s);
+}
+
+int ex(nodeType *p) {
+    if (!p) return 0;
+    print(p);
+    switch(p->type) {
+    case typeCon:       return p->con.value;
+    case typeId:        return sym[p->id.i];
+    case typeOpr:
+        switch(p->opr.oper) {
+        case WHILE:     while(ex(p->opr.op[0])) ex(p->opr.op[1]); return 0;
+        case IF:        if (ex(p->opr.op[0]))
+                            ex(p->opr.op[1]);
+                        else if (p->opr.nops > 2)
+                            ex(p->opr.op[2]);
+                        return 0;
+        case PRINT:     printf("%d\n", ex(p->opr.op[0])); return 0;
+        case ';':       ex(p->opr.op[0]); return ex(p->opr.op[1]);
+        case '=':       return sym[p->opr.op[0]->id.i] = ex(p->opr.op[1]);
+        case UMINUS:    return -ex(p->opr.op[0]);
+        case '+':       return ex(p->opr.op[0]) +  ex(p->opr.op[1]);
+        case '-':       return ex(p->opr.op[0]) -  ex(p->opr.op[1]);
+        case '*':       return ex(p->opr.op[0]) *  ex(p->opr.op[1]);
+        case '/':       return ex(p->opr.op[0]) /  ex(p->opr.op[1]);
+        case '<':       return ex(p->opr.op[0]) <  ex(p->opr.op[1]);
+        case '>':       return ex(p->opr.op[0]) >  ex(p->opr.op[1]);
+        case GE:        return ex(p->opr.op[0]) >= ex(p->opr.op[1]);
+        case LE:        return ex(p->opr.op[0]) <= ex(p->opr.op[1]);
+        case NE:        return ex(p->opr.op[0]) != ex(p->opr.op[1]);
+        case EQ:        return ex(p->opr.op[0]) == ex(p->opr.op[1]);
+        case AND:       return ex(p->opr.op[0]) && ex(p->opr.op[1]);
+        case OR:        return ex(p->opr.op[0]) || ex(p->opr.op[1]);
+        }
+    }
+    return 0;
+}
+
+const char* types[]={"typeCon", "typeId", "typeOpr"};
+void print(nodeType *p){
+    printf("%s, ", types[p->type]);
+    switch(p->type) {
+    case typeCon:       printf("value %d\n", p->con.value); break;
+    case typeId:        printf("value %d\n", sym[p->id.i]); break;
+    case typeOpr:       printf("value %c\n", p->opr.oper);  break;
+    }
 }
 
 int main(void) {

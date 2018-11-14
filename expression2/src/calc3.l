@@ -22,10 +22,12 @@ void yyerror(char *);
                 return INTEGER;
             }
 
-[-()<>=+*/;{}.] {
+[-()<>=+*/;{}.!\n] {
                 return *yytext;
              }
 
+"||"            return OR;
+"&&"            return AND;
 ">="            return GE;
 "<="            return LE;
 "=="            return EQ;
@@ -35,7 +37,7 @@ void yyerror(char *);
 "else"          return ELSE;
 "print"         return PRINT;
 
-[ \t\n]+        ;       /* ignore whitespace */
+[ \t]+        ;       /* ignore whitespace */
 
 .               {
                     ECHO;
