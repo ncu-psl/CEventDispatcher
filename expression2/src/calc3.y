@@ -36,17 +36,12 @@
 %nonassoc '!'
 %nonassoc UMINUS
 
-%type <nPtr> stmt expr
+%type <nPtr> input expr
 
 %%
 
 input:
-          input stmt            { printf("%d\n", ex($2)); freeNode($2); }
-        | /* NULL */
-        ;
-
-stmt:
-          expr                  { $$ = $1; }
+          expr                  { printf("%d\n", ex($1)); freeNode($1); }
         | PRINT expr            { $$ = opr(PRINT, 1, $2); }
         | VARIABLE '=' expr     { $$ = opr('=', 2, id($1), $3); }
         ;
