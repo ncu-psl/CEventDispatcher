@@ -33,28 +33,29 @@
 %left GE LE EQ NE '>' '<'
 %left '+' '-'
 %left '*' '/'
-%nonassoc "!"
+%nonassoc '!'
 %nonassoc UMINUS
 
 %type <nPtr> stmt expr
 
 %%
 
-program:
-          program stmt '\n'     { printf("%d\n", ex($2)); freeNode($2); }
+input:
+          input stmt            { printf("%d\n", ex($2)); freeNode($2); }
         | /* NULL */
         ;
 
 stmt:
-          expr                           { $$ = $1; }
-        | PRINT expr                     { $$ = opr(PRINT, 1, $2); }
-        | VARIABLE '=' expr              { $$ = opr('=', 2, id($1), $3); }
+          expr                  { $$ = $1; }
+        | PRINT expr            { $$ = opr(PRINT, 1, $2); }
+        | VARIABLE '=' expr     { $$ = opr('=', 2, id($1), $3); }
         ;
 
 expr:
           INTEGER               { $$ = con($1); }
         | VARIABLE              { $$ = id($1); }
         | '-' expr %prec UMINUS { $$ = opr(UMINUS, 1, $2); }
+        | '!' expr %prec UMINUS { $$ = opr('!', 1, $2); }
         | expr '+' expr         { $$ = opr('+', 2, $1, $3); }
         | expr '-' expr         { $$ = opr('-', 2, $1, $3); }
         | expr '*' expr         { $$ = opr('*', 2, $1, $3); }
@@ -153,6 +154,7 @@ int ex(nodeType *p) {
         case ';':       ex(p->opr.op[0]); return ex(p->opr.op[1]);
         case '=':       return sym[p->opr.op[0]->id.i] = ex(p->opr.op[1]);
         case UMINUS:    return -ex(p->opr.op[0]);
+        case '!':       return ex(p->opr.op[0]) == 1 ? 0 : 1 ;
         case '+':       return ex(p->opr.op[0]) +  ex(p->opr.op[1]);
         case '-':       return ex(p->opr.op[0]) -  ex(p->opr.op[1]);
         case '*':       return ex(p->opr.op[0]) *  ex(p->opr.op[1]);
