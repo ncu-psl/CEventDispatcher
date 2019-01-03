@@ -27,4 +27,4 @@ a.out
 *.tab.h
 
 # 不追蹤 output
-./expression2/output
+expression2/output/
