@@ -1,7 +1,7 @@
 %{
 #include <stdlib.h>
-#include "calc3.h"
-#include "calc3.tab.h"
+#include "calc.h"
+#include "calc.tab.h"
 void yyerror(char *);
 %}
 
@@ -46,4 +46,9 @@ void yyerror(char *);
 %%
 int yywrap(void) {
     return 1;
+}
+
+void eval(char input[]){
+    yy_scan_string(input);
+    yyparse();
 }

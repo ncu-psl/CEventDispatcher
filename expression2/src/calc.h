@@ -28,3 +28,6 @@ typedef struct nodeTypeTag {
 } nodeType;
 
 extern int sym[26];
+
+/* parse string */
+void eval(char *);

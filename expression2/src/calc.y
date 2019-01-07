@@ -2,7 +2,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <stdarg.h>
-    #include "calc3.h"
+    #include "calc.h"
     
     /* prototypes */
     nodeType *opr(int oper, int nops, ...);
@@ -84,6 +84,10 @@ nodeType *con(int value) {
 
 nodeType *id(int i) {
     nodeType *p;
+
+    // if(i == NULL){
+    //     yyerror("variable isn't exist");
+    // }
 
     /* allocate node */
     if ((p = malloc(sizeof(nodeType))) == NULL)
@@ -177,7 +181,16 @@ void print(nodeType *p){
     }
 }
 
-int main(void) {
-    yyparse();
-    return 0;
-}
+// int main(void) {
+//     yyparse();
+//     return 0;
+// }
+
+// void parse()
+// {
+// while(1) 
+//     {
+//     printf("Please enter numerical expression here: ");
+//     yyparse(); 
+//     }   
+// }
