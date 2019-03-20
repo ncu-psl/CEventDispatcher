@@ -1,8 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(){
-    int a = 123;
-    printf("hello\n");
-    
+
     return 0;
 }
