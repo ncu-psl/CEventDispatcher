@@ -31,3 +31,4 @@ extern int sym[26];
 
 /* parse string */
 int eval(char *);
+int result;

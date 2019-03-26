@@ -51,6 +51,6 @@ int yywrap(void) {
 int eval(char input[]){
     yy_scan_string(input);
     if(!yyparse()){
-        return 0;
+        return result;
     }
 }

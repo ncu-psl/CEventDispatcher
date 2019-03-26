@@ -1860,8 +1860,9 @@ int yywrap(void) {
     return 1;
 }
 
-void eval(char input[]){
+int eval(char input[]){
     yy_scan_string(input);
-    yyparse();
+    if(!yyparse()){
+        return result;
+    }
 }
-
