@@ -7,12 +7,13 @@ LIBS= ./src/expression2/output/libcalc.a
 
 main: DFH.o
 	@echo 'Building: $@'
-	@$(CC) $(SRC)/main.c $(ODIR)/DFN.o $(CFLAGS) $(LIBS) -o $(ODIR)/main.o 
+	@$(CC) $(SRC)/main.c $(ODIR)/DFN.o $(CFLAGS) $(LIBS) -o $(ODIR)/main.exe
 
 DFH.o:
 	@echo 'Building: $@'
-	@$(CC) $(SRC)/DFN.c $(CFLAGS) $(LIBS) -c -o $(ODIR)/DFN.o
+	@$(CC) $(SRC)/DFN.c -c -o $(ODIR)/DFN.o
 
 clean:
 	@echo 'Removing all binaries'
-	@rm -r $(ODIR)/*.exe
+	@rm -rf $(ODIR)/*.exe
+	@rm -rf $(ODIR)/*.o
