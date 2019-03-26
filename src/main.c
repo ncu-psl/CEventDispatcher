@@ -17,12 +17,12 @@ int main(void)
 
 	Handler handler;
 	handler.n_pfn = 0;
-    add(&handler, fn_A, "x>3");
+    add(&handler, fn_A, x>3);
 	run0(&handler);
 
     Handler1 handler1;
     handler1.n_pfn1 = 0;
-    add1(&handler1, fn_C, "x>5");
+    add1(&handler1, fn_C, x>5);
     run1(&handler1, array);
 
 	return 0;

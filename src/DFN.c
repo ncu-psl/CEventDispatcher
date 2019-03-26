@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-bool add(Handler *handler, DFN fn, char *expr)
+bool add_(Handler *handler, DFN fn, char *expr)
 {
 	if ((handler->n_pfn + 1) < max_size)
 	{
@@ -21,7 +21,7 @@ bool add(Handler *handler, DFN fn, char *expr)
 	}
 }
 
-bool add1(Handler1 *handler, DFN1 fn, char *expr)
+bool add1_(Handler1 *handler, DFN1 fn, char *expr)
 {
 	if ((handler->n_pfn1 + 1) < max_size)
 	{
@@ -45,7 +45,7 @@ bool del(Handler *handler, DFN fn)
 	for (i = 0; i < n; i++)
 	{
 		if (finish)
-		{
+		{ 
 			handler->pfn[i - 1] = handler->pfn[i];
 		}
 		if (handler->pfn[i] == fn)
@@ -69,10 +69,10 @@ bool run0(Handler *handler)
 	return 1;
 }
 
-bool runE(Handler1 *handler, int n)
+bool run_(Handler1 *handler, int n)
 {
 	int i;
-	// printf("eval %s = %d \n", handler->cond, eval1(handler->cond, n));
+	//printf("eval %s = %d \n", handler->cond, eval1(handler->cond, n));
 	if (eval1(handler->cond, n))
 	{
 		for (i = 0; i < handler->n_pfn1; i++)

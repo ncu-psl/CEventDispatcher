@@ -30,10 +30,12 @@ typedef struct Handler1
 */
 bool del(Handler *handler, DFN fn);
 bool add(Handler *handler, DFN fn, char *expr);
+bool add_(Handler *handler, DFN fn, char *expr);
 bool add1(Handler1 *handler1, DFN1 fn, char *expr);
+bool add1_(Handler1 *handler1, DFN1 fn, char *expr);
 bool run0(Handler *handler);
 bool run1(Handler1 *handler1, int array[]);
-bool runE(Handler1 *handler, int n);
+bool run_(Handler1 *handler, int n);
 void test(void);
 
 #define run1(Handler, array)                        \
@@ -44,9 +46,11 @@ void test(void);
 		for (i = 0; i < size; i++)                  \
 		{                                           \
 			printf("  input=  %d\n", array[i]);     \
-			runE(Handler, array[i]);                \
+			run_(Handler, array[i]);                \
 		}                                           \
 	} while (0)
 
-// #define add1(Handler1, DFN1, expr) add1(Handler1, DFN1, #expr)
+#define add(Handler, DFN1, expr) add_(Handler, DFN1, #expr)
+#define add1(Handler1, DFN1, expr) add1_(Handler1, DFN1, #expr)
+
 #endif
