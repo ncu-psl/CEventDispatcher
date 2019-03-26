@@ -1,7 +1,6 @@
 #include "DFN.h"
 #include <stdbool.h>
 #include <stdio.h>
-#include <../expression2/src/calc.h>
 
 void fn_A(void);
 void fn_B(void);
@@ -12,21 +11,19 @@ int main(void)
 {
 	bool a, b, c, check;
 	int x;
+	int array[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	
 	printf("Here is main\n");
 
-	// Handler1 handler1;
-	// handler1.n_pfn1 = 0;
-	// int array[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    // add1(&handler1, fn_A, x>3);
-    // add1(&handler1, fn_B, x>3);
-    // add1(&handler1, fn_C, x>5);
-    // add1(&handler1, fn_D, x>5);
-    // add1(&handler1, fn_E, x>1);
-	// run1(&handler1, array);
+	Handler handler;
+	handler.n_pfn = 0;
+    add(&handler, fn_A, "x>3");
+	run0(&handler);
 
-	char string1[] = "1+2+3";
-    eval(string1);
+    Handler1 handler1;
+    handler1.n_pfn1 = 0;
+    add1(&handler1, fn_C, "x>5");
+    run1(&handler1, array);
 
 	return 0;
 }

@@ -38,10 +38,11 @@
 
 %type <nPtr> input expr
 
+
 %%
 
 input:
-          expr                  { printf("%d\n", ex($1)); freeNode($1); }
+          expr                  { printf("%d\n", ex($1)); return ex($1); freeNode($1); }
         | PRINT expr            { $$ = opr(PRINT, 1, $2); }
         | VARIABLE '=' expr     { $$ = opr('=', 2, id($1), $3); }
         ;
@@ -180,17 +181,3 @@ void print(nodeType *p){
     case typeOpr:       printf("value %c\n", p->opr.oper);  break;
     }
 }
-
-// int main(void) {
-//     yyparse();
-//     return 0;
-// }
-
-// void parse()
-// {
-// while(1) 
-//     {
-//     printf("Please enter numerical expression here: ");
-//     yyparse(); 
-//     }   
-// }

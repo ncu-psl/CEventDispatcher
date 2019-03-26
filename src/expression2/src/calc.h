@@ -30,4 +30,4 @@ typedef struct nodeTypeTag {
 extern int sym[26];
 
 /* parse string */
-void eval(char *);
+int eval(char *);
