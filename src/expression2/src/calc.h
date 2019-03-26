@@ -32,5 +32,5 @@ extern int sym[26];
 /* parse string */
 int eval(char *);
 int eval1(char *, int arg);
-int result;
-int value;
+int result;                     //eval回傳值
+int value;                      //eval參數，取代未知變數
