@@ -26,4 +26,4 @@ main.exe: calc.o package
 
 clean:
 	@echo 'Removing all binaries'
-	@rm -r $(ODIR)/*
+	@rm -rf $(ODIR)/*

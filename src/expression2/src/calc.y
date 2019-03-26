@@ -137,7 +137,7 @@ void yyerror(char *s) {
 
 int ex(nodeType *p) {
     if (!p) return 0;
-    //print(p);
+    // print(p);
     switch(p->type) {
     case typeCon:       return p->con.value;
     case typeId:        return sym[p->id.i];

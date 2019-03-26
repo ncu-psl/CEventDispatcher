@@ -8,8 +8,8 @@ void yyerror(char *);
 %%
 
 [a-z]       { 
-                yylval.sIndex = *yytext - 'a';
-                return VARIABLE;
+                yylval.iValue = value;
+                return INTEGER;
             }
 
 0           {
@@ -49,6 +49,14 @@ int yywrap(void) {
 }
 
 int eval(char input[]){
+    yy_scan_string(input);
+    if(!yyparse()){
+        return result;
+    }
+}
+
+int eval1(char input[], int arg){
+    value = arg;
     yy_scan_string(input);
     if(!yyparse()){
         return result;

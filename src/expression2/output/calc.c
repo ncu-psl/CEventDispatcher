@@ -753,8 +753,8 @@ case 1:
 YY_RULE_SETUP
 #line 10 "src/calc.l"
 { 
-                yylval.sIndex = *yytext - 'a';
-                return VARIABLE;
+                yylval.iValue = value;
+                return INTEGER;
             }
 	YY_BREAK
 case 2:
@@ -1861,6 +1861,14 @@ int yywrap(void) {
 }
 
 int eval(char input[]){
+    yy_scan_string(input);
+    if(!yyparse()){
+        return result;
+    }
+}
+
+int eval1(char input[], int arg){
+    value = arg;
     yy_scan_string(input);
     if(!yyparse()){
         return result;
