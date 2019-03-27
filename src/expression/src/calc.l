@@ -8,7 +8,7 @@ void yyerror(char *);
 %%
 
 [a-z]       { 
-                yylval.iValue = value;
+                yylval.iValue = *value;
                 return INTEGER;
             }
 
@@ -56,7 +56,7 @@ int eval(char input[]){
 }
 
 int eval1(char input[], int arg){
-    value = arg;
+    *value = arg;
     yy_scan_string(input);
     if(!yyparse()){
         return result;

@@ -33,4 +33,4 @@ extern int sym[26];
 int eval(char *);
 int eval1(char *, int arg);
 int result;                     //eval回傳值
-int value;                      //eval參數，取代未知變數
+int *value;                      //eval參數，取代未知變數
