@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include "../expression2/src/calc.h"
+#include "../expression/src/calc.h"
 
 #define max_size 10
 /*

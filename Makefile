@@ -2,8 +2,8 @@ CC=gcc
 SRC=SRC
 ODIR=output
 
-CFLAGS= -I$(SRC) -I$(ODIR) -I./src/expression2/src -I./src/expression2/output
-LIBS= ./src/expression2/output/libcalc.a
+CFLAGS= -I$(SRC) -I$(ODIR) -I./src/expression/src -I./src/expression/output
+LIBS= ./src/expression/output/libcalc.a
 
 main: DFH.o
 	@echo 'Building: $@'
