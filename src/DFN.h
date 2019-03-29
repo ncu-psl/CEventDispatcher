@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #define max_size 10
+#define max_cond 20
 
 typedef void (*DFN)();
 typedef void (*DFN1)(int);
@@ -13,14 +14,14 @@ typedef struct Handler
 {
 	int n_pfn;
 	DFN pfn[max_size];
-	char cond[max_size];
+	char cond[max_size][max_cond];
 } Handler;
 
 typedef struct Handler1
 {
 	int n_pfn1;
 	DFN1 pfn1[max_size];
-	char cond[max_size];
+	char cond[max_size][max_cond];
 } Handler1;
 
 /*

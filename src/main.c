@@ -5,7 +5,7 @@
 void fn_A(void);
 void fn_B(void);
 void fn_C(int);
-int fn_D(void);
+void fn_D(int);
 
 int main(void)
 {
@@ -22,7 +22,8 @@ int main(void)
 
     Handler1 handler1;
     handler1.n_pfn1 = 0;
-    add1(&handler1, fn_C, x>5);
+    add1(&handler1, fn_C, x>3 && x<7);
+    add1(&handler1, fn_D, x>2 && x<9);
     run1(&handler1, array);
 
 	return 0;
@@ -43,7 +44,7 @@ void fn_C(int n)
 	printf("fn_C get %d\n", n);
 }
 
-int fn_D(void)
+void fn_D(int n)
 {
-	return 1;
+	printf("fn_D get %d\n", n);
 }
