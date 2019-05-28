@@ -3,12 +3,14 @@
 #include "calc.h"
 #include "calc.tab.h"
 void yyerror(char *);
+int result=0;                    //eval回傳值
+int arg1=0;                      //eval參數，取代未知變數
 %}
 
 %%
 
 [a-z]       { 
-                yylval.iValue = *value;
+                yylval.iValue = arg1;
                 return INTEGER;
             }
 
@@ -56,7 +58,8 @@ int eval(char input[]){
 }
 
 int eval1(char input[], int arg){
-    *value = arg;
+    // printf("eval1\n");
+    arg1 = arg;
     yy_scan_string(input);
     if(!yyparse()){
         return result;

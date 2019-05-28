@@ -1,4 +1,7 @@
-#include "DFN.h"
+/*
+C Event Dispatcher
+*/
+#include "CED.h"
 #include "./expression/src/calc.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -72,12 +75,18 @@ bool run0(Handler *handler)
 bool run_(Handler1 *handler, int n)
 {
 	int i;
-	//printf("eval %s = %d \n", handler->cond, eval1(handler->cond, n));
 	for (i = 0; i < handler->n_pfn1; i++)
 	{
+	    // printf("\teval %s = %d \n", handler->cond[i], eval1(handler->cond[i], n));
 		if (eval1(handler->cond[i], n))
 			handler->pfn1[i](n);
 	}
 
 	return 1;
+}
+
+int test(char *expr, int input){
+	printf("Here is test\n");
+    printf("expr=%s, input=%d\n", expr, input);
+    return eval1(expr, input);
 }

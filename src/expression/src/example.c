@@ -16,7 +16,8 @@ int main(){
     int x=6;
     char string4[] = "x>5";
     printf("%s,x=%d,result=%d\n", string4, x, eval1(string4, x) );
-
+    x = 3;
+    printf("%s,x=%d,result=%d\n", string4, x, eval1(string4, x) );
     // YY_BUFFER_STATE buffer = yy_scan_string(string);
     // yyparse();
     // yy_delete_buffer(buffer);

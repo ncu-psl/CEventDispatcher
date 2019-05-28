@@ -8,7 +8,7 @@ ODIR=output
 CFLAGS=-I$(SRC) -I$(ODIR)
 LIBS=
 
-package: calc.o
+libcalc.a: calc.o
 	@echo 'Building: $@'
 	@ar -rcs $(ODIR)/libcalc.a $(ODIR)/calc.o $(ODIR)/calc.tab.o
 
@@ -20,9 +20,9 @@ calc.o:
 	@$(CC) $(ODIR)/calc.tab.c $(CFLAGS) $(LIBS) -c -o $(ODIR)/calc.tab.o
 	@$(CC) $(ODIR)/calc.c $(CFLAGS) $(LIBS) -c -o $(ODIR)/calc.o
 
-main.exe: calc.o package
+example: calc.o libcalc.a
 	@echo 'Building: $@'
-	@$(CC) $(SRC)/main.c $(ODIR)/libcalc.a $(CFLAGS) $(LIBS) -o $(ODIR)/main.exe
+	@$(CC) $(SRC)/example.c $(ODIR)/libcalc.a $(CFLAGS) $(LIBS) -o $(ODIR)/example.exe
 
 clean:
 	@echo 'Removing all binaries'

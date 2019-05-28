@@ -1,4 +1,4 @@
-Terminals unused in grammar
+終端機在文法中未使用
 
    WHILE
    IF
@@ -6,7 +6,7 @@ Terminals unused in grammar
    ELSE
 
 
-Grammar
+文法
 
     0 $accept: input $end
 
@@ -33,7 +33,7 @@ Grammar
    20     | '(' expr ')'
 
 
-Terminals, with rules where they appear
+終結語詞，附有它們出現處的規則
 
 $end (0) 0
 '!' (33) 7
@@ -63,109 +63,109 @@ NE (270) 18
 UMINUS (271)
 
 
-Nonterminals, with rules where they appear
+非終結語詞，附有它們出現處的規則
 
 $accept (27)
-    on left: 0
+    於左側： 0
 input (28)
-    on left: 1 2 3, on right: 0
+    於左側： 1 2 3, 於右側： 0
 expr (29)
-    on left: 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20, on right:
+    於左側： 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20, 於右側：
     1 2 3 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 
 
-State 0
+狀態 0
 
     0 $accept: . input $end
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 2
-    PRINT     shift, and go to state 3
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 2
+    PRINT     偏移，並進入狀態 3
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    input  go to state 7
-    expr   go to state 8
+    input  進入狀態 7
+    expr   進入狀態 8
 
 
-State 1
+狀態 1
 
     4 expr: INTEGER .
 
-    $default  reduce using rule 4 (expr)
+    $預設  使用規則 4 以縮減 (expr)
 
 
-State 2
+狀態 2
 
     3 input: VARIABLE . '=' expr
     5 expr: VARIABLE .
 
-    '='  shift, and go to state 9
+    '='  偏移，並進入狀態 9
 
-    $default  reduce using rule 5 (expr)
+    $預設  使用規則 5 以縮減 (expr)
 
 
-State 3
+狀態 3
 
     2 input: PRINT . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 11
+    expr  進入狀態 11
 
 
-State 4
+狀態 4
 
     6 expr: '-' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 12
+    expr  進入狀態 12
 
 
-State 5
+狀態 5
 
     7 expr: '!' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 13
+    expr  進入狀態 13
 
 
-State 6
+狀態 6
 
    20 expr: '(' . expr ')'
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 14
+    expr  進入狀態 14
 
 
-State 7
+狀態 7
 
     0 $accept: input . $end
 
-    $end  shift, and go to state 15
+    $end  偏移，並進入狀態 15
 
 
-State 8
+狀態 8
 
     1 input: expr .
     8 expr: expr . '+' expr
@@ -181,43 +181,43 @@ State 8
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    OR   shift, and go to state 16
-    AND  shift, and go to state 17
-    GE   shift, and go to state 18
-    LE   shift, and go to state 19
-    EQ   shift, and go to state 20
-    NE   shift, and go to state 21
-    '>'  shift, and go to state 22
-    '<'  shift, and go to state 23
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    OR   偏移，並進入狀態 16
+    AND  偏移，並進入狀態 17
+    GE   偏移，並進入狀態 18
+    LE   偏移，並進入狀態 19
+    EQ   偏移，並進入狀態 20
+    NE   偏移，並進入狀態 21
+    '>'  偏移，並進入狀態 22
+    '<'  偏移，並進入狀態 23
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 1 (input)
+    $預設  使用規則 1 以縮減 (input)
 
 
-State 9
+狀態 9
 
     3 input: VARIABLE '=' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 28
+    expr  進入狀態 28
 
 
-State 10
+狀態 10
 
     5 expr: VARIABLE .
 
-    $default  reduce using rule 5 (expr)
+    $預設  使用規則 5 以縮減 (expr)
 
 
-State 11
+狀態 11
 
     2 input: PRINT expr .
     8 expr: expr . '+' expr
@@ -233,23 +233,23 @@ State 11
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    OR   shift, and go to state 16
-    AND  shift, and go to state 17
-    GE   shift, and go to state 18
-    LE   shift, and go to state 19
-    EQ   shift, and go to state 20
-    NE   shift, and go to state 21
-    '>'  shift, and go to state 22
-    '<'  shift, and go to state 23
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    OR   偏移，並進入狀態 16
+    AND  偏移，並進入狀態 17
+    GE   偏移，並進入狀態 18
+    LE   偏移，並進入狀態 19
+    EQ   偏移，並進入狀態 20
+    NE   偏移，並進入狀態 21
+    '>'  偏移，並進入狀態 22
+    '<'  偏移，並進入狀態 23
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 2 (input)
+    $預設  使用規則 2 以縮減 (input)
 
 
-State 12
+狀態 12
 
     6 expr: '-' expr .
     8     | expr . '+' expr
@@ -265,10 +265,10 @@ State 12
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    $default  reduce using rule 6 (expr)
+    $預設  使用規則 6 以縮減 (expr)
 
 
-State 13
+狀態 13
 
     7 expr: '!' expr .
     8     | expr . '+' expr
@@ -284,10 +284,10 @@ State 13
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    $default  reduce using rule 7 (expr)
+    $預設  使用規則 7 以縮減 (expr)
 
 
-State 14
+狀態 14
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -303,185 +303,185 @@ State 14
    19     | expr . EQ expr
    20     | '(' expr . ')'
 
-    OR   shift, and go to state 16
-    AND  shift, and go to state 17
-    GE   shift, and go to state 18
-    LE   shift, and go to state 19
-    EQ   shift, and go to state 20
-    NE   shift, and go to state 21
-    '>'  shift, and go to state 22
-    '<'  shift, and go to state 23
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
-    ')'  shift, and go to state 29
+    OR   偏移，並進入狀態 16
+    AND  偏移，並進入狀態 17
+    GE   偏移，並進入狀態 18
+    LE   偏移，並進入狀態 19
+    EQ   偏移，並進入狀態 20
+    NE   偏移，並進入狀態 21
+    '>'  偏移，並進入狀態 22
+    '<'  偏移，並進入狀態 23
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
+    ')'  偏移，並進入狀態 29
 
 
-State 15
+狀態 15
 
     0 $accept: input $end .
 
-    $default  accept
+    $預設  接受
 
 
-State 16
+狀態 16
 
    15 expr: expr OR . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 30
+    expr  進入狀態 30
 
 
-State 17
+狀態 17
 
    14 expr: expr AND . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 31
+    expr  進入狀態 31
 
 
-State 18
+狀態 18
 
    16 expr: expr GE . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 32
+    expr  進入狀態 32
 
 
-State 19
+狀態 19
 
    17 expr: expr LE . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 33
+    expr  進入狀態 33
 
 
-State 20
+狀態 20
 
    19 expr: expr EQ . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 34
+    expr  進入狀態 34
 
 
-State 21
+狀態 21
 
    18 expr: expr NE . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 35
+    expr  進入狀態 35
 
 
-State 22
+狀態 22
 
    13 expr: expr '>' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 36
+    expr  進入狀態 36
 
 
-State 23
+狀態 23
 
    12 expr: expr '<' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 37
+    expr  進入狀態 37
 
 
-State 24
+狀態 24
 
     8 expr: expr '+' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 38
+    expr  進入狀態 38
 
 
-State 25
+狀態 25
 
     9 expr: expr '-' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 39
+    expr  進入狀態 39
 
 
-State 26
+狀態 26
 
    10 expr: expr '*' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 40
+    expr  進入狀態 40
 
 
-State 27
+狀態 27
 
    11 expr: expr '/' . expr
 
-    INTEGER   shift, and go to state 1
-    VARIABLE  shift, and go to state 10
-    '-'       shift, and go to state 4
-    '!'       shift, and go to state 5
-    '('       shift, and go to state 6
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
 
-    expr  go to state 41
+    expr  進入狀態 41
 
 
-State 28
+狀態 28
 
     3 input: VARIABLE '=' expr .
     8 expr: expr . '+' expr
@@ -497,30 +497,30 @@ State 28
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    OR   shift, and go to state 16
-    AND  shift, and go to state 17
-    GE   shift, and go to state 18
-    LE   shift, and go to state 19
-    EQ   shift, and go to state 20
-    NE   shift, and go to state 21
-    '>'  shift, and go to state 22
-    '<'  shift, and go to state 23
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    OR   偏移，並進入狀態 16
+    AND  偏移，並進入狀態 17
+    GE   偏移，並進入狀態 18
+    LE   偏移，並進入狀態 19
+    EQ   偏移，並進入狀態 20
+    NE   偏移，並進入狀態 21
+    '>'  偏移，並進入狀態 22
+    '<'  偏移，並進入狀態 23
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 3 (input)
+    $預設  使用規則 3 以縮減 (input)
 
 
-State 29
+狀態 29
 
    20 expr: '(' expr ')' .
 
-    $default  reduce using rule 20 (expr)
+    $預設  使用規則 20 以縮減 (expr)
 
 
-State 30
+狀態 30
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -536,21 +536,21 @@ State 30
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    GE   shift, and go to state 18
-    LE   shift, and go to state 19
-    EQ   shift, and go to state 20
-    NE   shift, and go to state 21
-    '>'  shift, and go to state 22
-    '<'  shift, and go to state 23
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    GE   偏移，並進入狀態 18
+    LE   偏移，並進入狀態 19
+    EQ   偏移，並進入狀態 20
+    NE   偏移，並進入狀態 21
+    '>'  偏移，並進入狀態 22
+    '<'  偏移，並進入狀態 23
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 15 (expr)
+    $預設  使用規則 15 以縮減 (expr)
 
 
-State 31
+狀態 31
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -566,21 +566,21 @@ State 31
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    GE   shift, and go to state 18
-    LE   shift, and go to state 19
-    EQ   shift, and go to state 20
-    NE   shift, and go to state 21
-    '>'  shift, and go to state 22
-    '<'  shift, and go to state 23
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    GE   偏移，並進入狀態 18
+    LE   偏移，並進入狀態 19
+    EQ   偏移，並進入狀態 20
+    NE   偏移，並進入狀態 21
+    '>'  偏移，並進入狀態 22
+    '<'  偏移，並進入狀態 23
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 14 (expr)
+    $預設  使用規則 14 以縮減 (expr)
 
 
-State 32
+狀態 32
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -596,15 +596,15 @@ State 32
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 16 (expr)
+    $預設  使用規則 16 以縮減 (expr)
 
 
-State 33
+狀態 33
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -620,15 +620,15 @@ State 33
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 17 (expr)
+    $預設  使用規則 17 以縮減 (expr)
 
 
-State 34
+狀態 34
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -644,15 +644,15 @@ State 34
    19     | expr . EQ expr
    19     | expr EQ expr .
 
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 19 (expr)
+    $預設  使用規則 19 以縮減 (expr)
 
 
-State 35
+狀態 35
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -668,15 +668,15 @@ State 35
    18     | expr NE expr .
    19     | expr . EQ expr
 
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 18 (expr)
+    $預設  使用規則 18 以縮減 (expr)
 
 
-State 36
+狀態 36
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -692,15 +692,15 @@ State 36
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 13 (expr)
+    $預設  使用規則 13 以縮減 (expr)
 
 
-State 37
+狀態 37
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -716,15 +716,15 @@ State 37
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    '+'  shift, and go to state 24
-    '-'  shift, and go to state 25
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 12 (expr)
+    $預設  使用規則 12 以縮減 (expr)
 
 
-State 38
+狀態 38
 
     8 expr: expr . '+' expr
     8     | expr '+' expr .
@@ -740,13 +740,13 @@ State 38
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 8 (expr)
+    $預設  使用規則 8 以縮減 (expr)
 
 
-State 39
+狀態 39
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -762,13 +762,13 @@ State 39
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    '*'  shift, and go to state 26
-    '/'  shift, and go to state 27
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
 
-    $default  reduce using rule 9 (expr)
+    $預設  使用規則 9 以縮減 (expr)
 
 
-State 40
+狀態 40
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -784,10 +784,10 @@ State 40
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    $default  reduce using rule 10 (expr)
+    $預設  使用規則 10 以縮減 (expr)
 
 
-State 41
+狀態 41
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
@@ -803,4 +803,4 @@ State 41
    18     | expr . NE expr
    19     | expr . EQ expr
 
-    $default  reduce using rule 11 (expr)
+    $預設  使用規則 11 以縮減 (expr)

@@ -1,5 +1,5 @@
-#ifndef DFN_H
-#define DFN_H
+#ifndef CED_H
+#define CED_H
 
 #include <stdbool.h>
 #include <stdio.h>

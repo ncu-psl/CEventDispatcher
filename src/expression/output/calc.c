@@ -471,8 +471,10 @@ char *yytext;
 #include "calc.h"
 #include "calc.tab.h"
 void yyerror(char *);
-#line 475 "output/calc.c"
-#line 476 "output/calc.c"
+int result;                     //eval回傳值
+int arg1=0;                      //eval參數，取代未知變數
+#line 477 "output/calc.c"
+#line 478 "output/calc.c"
 
 #define INITIAL 0
 
@@ -689,10 +691,10 @@ YY_DECL
 		}
 
 	{
-#line 8 "src/calc.l"
+#line 10 "src/calc.l"
 
 
-#line 696 "output/calc.c"
+#line 698 "output/calc.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -751,15 +753,15 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 "src/calc.l"
+#line 12 "src/calc.l"
 { 
-                yylval.iValue = value;
+                yylval.iValue = arg1;
                 return INTEGER;
             }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "src/calc.l"
+#line 17 "src/calc.l"
 {
                 yylval.iValue = atoi(yytext);
                 return INTEGER;
@@ -767,7 +769,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 20 "src/calc.l"
+#line 22 "src/calc.l"
 {
                 yylval.iValue = atoi(yytext);
                 return INTEGER;
@@ -776,69 +778,69 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 25 "src/calc.l"
+#line 27 "src/calc.l"
 {
                 return *yytext;
              }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 29 "src/calc.l"
+#line 31 "src/calc.l"
 return OR;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 30 "src/calc.l"
+#line 32 "src/calc.l"
 return AND;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 31 "src/calc.l"
+#line 33 "src/calc.l"
 return GE;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 32 "src/calc.l"
+#line 34 "src/calc.l"
 return LE;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 33 "src/calc.l"
+#line 35 "src/calc.l"
 return EQ;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 34 "src/calc.l"
+#line 36 "src/calc.l"
 return NE;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 35 "src/calc.l"
+#line 37 "src/calc.l"
 return WHILE;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 36 "src/calc.l"
+#line 38 "src/calc.l"
 return IF;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 37 "src/calc.l"
+#line 39 "src/calc.l"
 return ELSE;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 38 "src/calc.l"
+#line 40 "src/calc.l"
 return PRINT;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 40 "src/calc.l"
+#line 42 "src/calc.l"
 ;       /* ignore whitespace */
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 42 "src/calc.l"
+#line 44 "src/calc.l"
 {
                     ECHO;
                     yyerror("  Unknown character");
@@ -846,10 +848,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 46 "src/calc.l"
+#line 48 "src/calc.l"
 ECHO;
 	YY_BREAK
-#line 853 "output/calc.c"
+#line 855 "output/calc.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1854,7 +1856,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 46 "src/calc.l"
+#line 48 "src/calc.l"
 
 int yywrap(void) {
     return 1;
@@ -1868,7 +1870,8 @@ int eval(char input[]){
 }
 
 int eval1(char input[], int arg){
-    value = arg;
+    // printf("eval1\n");
+    arg1 = arg;
     yy_scan_string(input);
     if(!yyparse()){
         return result;

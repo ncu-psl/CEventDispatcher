@@ -1,5 +1,8 @@
-#ifndef DFN_H
-#define DFN_H
+/*
+C Event Dispatcher
+*/
+#ifndef CED_H
+#define CED_H
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -28,6 +31,7 @@ typedef struct Handler1
 * run1：找出array中符合expr條件的元素，執行Handler
 * Handler：包含一個int參數的function形成的Handler
 * array：input陣列
+* add_, add1_：將 expr 轉換為string儲存
 */
 bool del(Handler *handler, DFN fn);
 bool add(Handler *handler, DFN fn, char *expr);
@@ -37,7 +41,7 @@ bool add1_(Handler1 *handler1, DFN1 fn, char *expr);
 bool run0(Handler *handler);
 bool run1(Handler1 *handler1, int array[]);
 bool run_(Handler1 *handler, int n);
-void test(void);
+int test(char *expr, int input);
 
 #define run1(Handler, array)                        \
 	do                                              \
@@ -46,12 +50,12 @@ void test(void);
 		int i = 0;                                  \
 		for (i = 0; i < size; i++)                  \
 		{                                           \
-			printf("  input=  %d\n", array[i]);     \
+			printf("\tinput=%d\n", array[i]);     \
 			run_(Handler, array[i]);                \
 		}                                           \
 	} while (0)
 
-#define add(Handler, DFN1, expr) add_(Handler, DFN1, #expr)
-#define add1(Handler1, DFN1, expr) add1_(Handler1, DFN1, #expr)
+#define add(Handler, CED1, expr) add_(Handler, CED1, #expr)
+#define add1(Handler1, CED1, expr) add1_(Handler1, CED1, #expr)
 
 #endif

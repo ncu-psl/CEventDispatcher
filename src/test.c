@@ -1,4 +1,4 @@
-#include "DFN.h"
+#include "CED.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -10,15 +10,17 @@ void fn_D(int);
 int main(void)
 {
 	bool a, b, c, check;
-	int x;
+	int x=5;
 	int array[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	
-	printf("Here is main\n");
+	printf("Here is test\n");
 
 	Handler handler;
 	handler.n_pfn = 0;
     add(&handler, fn_A, x>3);
+    add(&handler, fn_B, x>5 && x<8);
 	run0(&handler);
+    
 
     Handler1 handler1;
     handler1.n_pfn1 = 0;
