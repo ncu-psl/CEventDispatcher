@@ -41,7 +41,7 @@ bool add1_(Handler1 *handler1, DFN1 fn, char *expr);
 bool run0(Handler *handler);
 bool run1(Handler1 *handler1, int array[]);
 bool run_(Handler1 *handler, int n);
-int test(char *expr, int input);
+int testEval1(char *expr, int input);
 
 #define run1(Handler, array)                        \
 	do                                              \

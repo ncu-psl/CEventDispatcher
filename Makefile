@@ -1,30 +1,32 @@
 CC=gcc
 SRC=src
 ODIR=output
-EX=example
 
-CFLAGS= -I$(SRC) -I$(ODIR) -I./src/expression/src -I./src/expression/output
-LIBS= ./src/expression/output/libcalc.a
+EXPR= ./src/expression/output/calc.o ./src/expression/output/calc.tab.o
 
-all: expr CED.o test
+libCED.a: expr CED.o
 	@echo 'Building: $@'
+	@ar -rcs $(ODIR)/libCED.a $(ODIR)/CED.o $(EXPR)
 
-test: CED.o
+test: libCED.a
 	@echo 'Building: $@'
-	@$(CC) $(SRC)/test.c $(ODIR)/CED.o $(CFLAGS) $(LIBS) -o $(ODIR)/test.exe
-
-expr:
-	@echo 'Building: $@'
-	@$(MAKE) -C $(SRC)/expression
+	@$(CC) $(SRC)/test.c $(ODIR)/libCED.a -o $(ODIR)/test.exe
 
 CED.o:
 	@echo 'Building: $@'
 	@$(CC) $(SRC)/CED.c -c -o $(ODIR)/CED.o
 
-ex1:
+expr:
 	@echo 'Building: $@'
-	@$(CC) $(EX)/ex1_multikey.c $(ODIR)/CED.o $(CFLAGS) $(LIBS) -o $(ODIR)/ex1_multikey.exe -lncurses
+	@$(MAKE) -C $(SRC)/expression
 
+ex_ncurses:
+	@echo 'Building: $@'
+	@$(CC) ./example/ex_ncurses.c $(ODIR)/libCED.a -o $(ODIR)/ex_ncurses.exe -lncurses
+
+GetKeyboardState:
+	@echo 'Building: $@'
+	@$(CC) ./example/GetKeyboardState.c $(ODIR)/libCED.a -o $(ODIR)/GetKeyboardState.exe
 
 clean:
 	@echo 'Removing all binaries'

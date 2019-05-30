@@ -471,7 +471,7 @@ char *yytext;
 #include "calc.h"
 #include "calc.tab.h"
 void yyerror(char *);
-int result;                     //eval回傳值
+int result=0;                    //eval回傳值
 int arg1=0;                      //eval參數，取代未知變數
 #line 477 "output/calc.c"
 #line 478 "output/calc.c"

@@ -85,7 +85,7 @@ bool run_(Handler1 *handler, int n)
 	return 1;
 }
 
-int test(char *expr, int input){
+int testEval1(char *expr, int input){
 	printf("Here is test\n");
     printf("expr=%s, input=%d\n", expr, input);
     return eval1(expr, input);
