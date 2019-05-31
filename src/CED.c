@@ -7,7 +7,7 @@ C Event Dispatcher
 #include <stdio.h>
 #include <string.h>
 
-bool add_(Handler *handler, DFN fn, char *expr)
+bool add_(Handler_ *handler, DFN fn, char *expr)
 {
 	if ((handler->n_pfn + 1) < max_size)
 	{
@@ -24,7 +24,7 @@ bool add_(Handler *handler, DFN fn, char *expr)
 	}
 }
 
-bool add1_(Handler1 *handler, DFN1 fn, char *expr)
+bool add1_(Handler1_ *handler, DFN1 fn, char *expr)
 {
 	if ((handler->n_pfn1 + 1) < max_size)
 	{
@@ -41,7 +41,7 @@ bool add1_(Handler1 *handler, DFN1 fn, char *expr)
 	}
 }
 
-bool del(Handler *handler, DFN fn)
+bool del(Handler_ *handler, DFN fn)
 {
 	int i, n = handler->n_pfn;
 	bool finish = false;
@@ -62,7 +62,7 @@ bool del(Handler *handler, DFN fn)
 	return finish;
 }
 
-bool run0(Handler *handler)
+bool run0(Handler_ *handler)
 {
 	int i;
 	for (i = 0; i < handler->n_pfn; i++)
@@ -72,7 +72,7 @@ bool run0(Handler *handler)
 	return 1;
 }
 
-bool run_(Handler1 *handler, int n)
+bool run_(Handler1_ *handler, int n)
 {
 	int i;
 	for (i = 0; i < handler->n_pfn1; i++)

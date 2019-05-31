@@ -9,7 +9,22 @@ int arg1=0;                      //eval參數，取代未知變數
 
 %%
 
-[a-z]       { 
+"||"            return OR;
+"&&"            return AND;
+">="            return GE;
+"<="            return LE;
+"=="            return EQ;
+"!="            return NE;
+"while"         return WHILE;
+"if"            return IF;
+"else"          return ELSE;
+"print"         return PRINT;
+
+'[a-z]'     {
+                yylval.iValue = (int)yytext[1];
+                return INTEGER;
+            }
+[a-z]+      { 
                 yylval.iValue = arg1;
                 return INTEGER;
             }
@@ -27,18 +42,6 @@ int arg1=0;                      //eval參數，取代未知變數
 [-()<>=+*/;{}.!\n] {
                 return *yytext;
              }
-
-"||"            return OR;
-"&&"            return AND;
-">="            return GE;
-"<="            return LE;
-"=="            return EQ;
-"!="            return NE;
-"while"         return WHILE;
-"if"            return IF;
-"else"          return ELSE;
-"print"         return PRINT;
-
 [ \t]+        ;       /* ignore whitespace */
 
 .               {
