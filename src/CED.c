@@ -11,26 +11,10 @@ bool add_(Handler_ *handler, DFN fn, char *expr)
 {
 	if ((handler->n_pfn + 1) < max_size)
 	{
-		handler->pfn[handler->n_pfn] = fn;
-		strcpy(handler->cond[handler->n_pfn], expr);
+        int n = handler->n_pfn;
+        handler->event[n].pfn = fn;
+		strcpy(handler->event[n].cond, expr);
 		handler->n_pfn++;
-		//printf("fn add %d\n", handler->n_pfn);
-		return 1;
-	}
-	else
-	{
-		printf("FULL\n");
-		return 0;
-	}
-}
-
-bool add1_(Handler1_ *handler, DFN1 fn, char *expr)
-{
-	if ((handler->n_pfn1 + 1) < max_size)
-	{
-		handler->pfn1[handler->n_pfn1] = fn;
-		strcpy(handler->cond[handler->n_pfn1], expr);
-		handler->n_pfn1++;
 		//printf("fn add1 %d\n", handler->n_pfn1);
 		return 1;
 	}
@@ -49,37 +33,39 @@ bool del(Handler_ *handler, DFN fn)
 	{
 		if (finish)
 		{
-			handler->pfn[i - 1] = handler->pfn[i];
+			handler->event[i - 1] = handler->event[i];
 		}
-		if (handler->pfn[i] == fn)
+		if (handler->event[i].pfn == fn)
 		{
-			handler->pfn[i] = NULL;
+			handler->event[i].pfn = NULL;
+			handler->event[i].cond[0] = '\0';
 			handler->n_pfn--;
 			finish = true;
-			printf("fn del\n");
+			// printf("fn del\n");
 		}
 	}
 	return finish;
 }
 
-bool run0(Handler_ *handler)
+bool run(Handler_ *handler)
 {
 	int i;
 	for (i = 0; i < handler->n_pfn; i++)
 	{
-		handler->pfn[i]();
+		handler->event[i].pfn();
 	}
+
 	return 1;
 }
 
-bool run_(Handler1_ *handler, int n)
+bool run_(Handler_ *handler, int n)
 {
 	int i;
-	for (i = 0; i < handler->n_pfn1; i++)
+	for (i = 0; i < handler->n_pfn; i++)
 	{
 	    // printf("\teval %s = %d \n", handler->cond[i], eval1(handler->cond[i], n));
-		if (eval1(handler->cond[i], n))
-			handler->pfn1[i](n);
+		if (eval1(handler->event[i].cond, n))
+			handler->event[i].pfn(n);
 	}
 
 	return 1;
