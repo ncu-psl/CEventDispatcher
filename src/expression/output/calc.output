@@ -22,30 +22,32 @@
     9     | expr '-' expr
    10     | expr '*' expr
    11     | expr '/' expr
-   12     | expr '<' expr
-   13     | expr '>' expr
-   14     | expr AND expr
-   15     | expr OR expr
-   16     | expr GE expr
-   17     | expr LE expr
-   18     | expr NE expr
-   19     | expr EQ expr
-   20     | '(' expr ')'
+   12     | expr '%' expr
+   13     | expr '<' expr
+   14     | expr '>' expr
+   15     | expr AND expr
+   16     | expr OR expr
+   17     | expr GE expr
+   18     | expr LE expr
+   19     | expr NE expr
+   20     | expr EQ expr
+   21     | '(' expr ')'
 
 
 終結語詞，附有它們出現處的規則
 
 $end (0) 0
 '!' (33) 7
-'(' (40) 20
-')' (41) 20
+'%' (37) 12
+'(' (40) 21
+')' (41) 21
 '*' (42) 10
 '+' (43) 8
 '-' (45) 6 9
 '/' (47) 11
-'<' (60) 12
+'<' (60) 13
 '=' (61) 3
-'>' (62) 13
+'>' (62) 14
 error (256)
 INTEGER (258) 4
 VARIABLE (259) 3 5
@@ -54,24 +56,24 @@ IF (261)
 PRINT (262) 2
 IFX (263)
 ELSE (264)
-OR (265) 15
-AND (266) 14
-GE (267) 16
-LE (268) 17
-EQ (269) 19
-NE (270) 18
+OR (265) 16
+AND (266) 15
+GE (267) 17
+LE (268) 18
+EQ (269) 20
+NE (270) 19
 UMINUS (271)
 
 
 非終結語詞，附有它們出現處的規則
 
-$accept (27)
+$accept (28)
     於左側： 0
-input (28)
+input (29)
     於左側： 1 2 3, 於右側： 0
-expr (29)
-    於左側： 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20, 於右側：
-    1 2 3 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+expr (30)
+    於左側： 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21, 於右側：
+    1 2 3 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
 
 
 狀態 0
@@ -147,7 +149,7 @@ expr (29)
 
 狀態 6
 
-   20 expr: '(' . expr ')'
+   21 expr: '(' . expr ')'
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -172,14 +174,15 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     OR   偏移，並進入狀態 16
     AND  偏移，並進入狀態 17
@@ -193,6 +196,7 @@ expr (29)
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
     $預設  使用規則 1 以縮減 (input)
 
@@ -207,7 +211,7 @@ expr (29)
     '!'       偏移，並進入狀態 5
     '('       偏移，並進入狀態 6
 
-    expr  進入狀態 28
+    expr  進入狀態 29
 
 
 狀態 10
@@ -224,14 +228,15 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     OR   偏移，並進入狀態 16
     AND  偏移，並進入狀態 17
@@ -245,6 +250,7 @@ expr (29)
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
     $預設  使用規則 2 以縮減 (input)
 
@@ -256,14 +262,15 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     $預設  使用規則 6 以縮減 (expr)
 
@@ -275,14 +282,15 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     $預設  使用規則 7 以縮減 (expr)
 
@@ -293,15 +301,16 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
-   20     | '(' expr . ')'
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
+   21     | '(' expr . ')'
 
     OR   偏移，並進入狀態 16
     AND  偏移，並進入狀態 17
@@ -315,7 +324,8 @@ expr (29)
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
-    ')'  偏移，並進入狀態 29
+    '%'  偏移，並進入狀態 28
+    ')'  偏移，並進入狀態 30
 
 
 狀態 15
@@ -327,20 +337,7 @@ expr (29)
 
 狀態 16
 
-   15 expr: expr OR . expr
-
-    INTEGER   偏移，並進入狀態 1
-    VARIABLE  偏移，並進入狀態 10
-    '-'       偏移，並進入狀態 4
-    '!'       偏移，並進入狀態 5
-    '('       偏移，並進入狀態 6
-
-    expr  進入狀態 30
-
-
-狀態 17
-
-   14 expr: expr AND . expr
+   16 expr: expr OR . expr
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -351,9 +348,9 @@ expr (29)
     expr  進入狀態 31
 
 
-狀態 18
+狀態 17
 
-   16 expr: expr GE . expr
+   15 expr: expr AND . expr
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -364,9 +361,9 @@ expr (29)
     expr  進入狀態 32
 
 
-狀態 19
+狀態 18
 
-   17 expr: expr LE . expr
+   17 expr: expr GE . expr
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -377,9 +374,9 @@ expr (29)
     expr  進入狀態 33
 
 
-狀態 20
+狀態 19
 
-   19 expr: expr EQ . expr
+   18 expr: expr LE . expr
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -390,9 +387,9 @@ expr (29)
     expr  進入狀態 34
 
 
-狀態 21
+狀態 20
 
-   18 expr: expr NE . expr
+   20 expr: expr EQ . expr
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -403,9 +400,9 @@ expr (29)
     expr  進入狀態 35
 
 
-狀態 22
+狀態 21
 
-   13 expr: expr '>' . expr
+   19 expr: expr NE . expr
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -416,9 +413,9 @@ expr (29)
     expr  進入狀態 36
 
 
-狀態 23
+狀態 22
 
-   12 expr: expr '<' . expr
+   14 expr: expr '>' . expr
 
     INTEGER   偏移，並進入狀態 1
     VARIABLE  偏移，並進入狀態 10
@@ -427,6 +424,19 @@ expr (29)
     '('       偏移，並進入狀態 6
 
     expr  進入狀態 37
+
+
+狀態 23
+
+   13 expr: expr '<' . expr
+
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
+
+    expr  進入狀態 38
 
 
 狀態 24
@@ -439,7 +449,7 @@ expr (29)
     '!'       偏移，並進入狀態 5
     '('       偏移，並進入狀態 6
 
-    expr  進入狀態 38
+    expr  進入狀態 39
 
 
 狀態 25
@@ -452,7 +462,7 @@ expr (29)
     '!'       偏移，並進入狀態 5
     '('       偏移，並進入狀態 6
 
-    expr  進入狀態 39
+    expr  進入狀態 40
 
 
 狀態 26
@@ -465,7 +475,7 @@ expr (29)
     '!'       偏移，並進入狀態 5
     '('       偏移，並進入狀態 6
 
-    expr  進入狀態 40
+    expr  進入狀態 41
 
 
 狀態 27
@@ -478,24 +488,38 @@ expr (29)
     '!'       偏移，並進入狀態 5
     '('       偏移，並進入狀態 6
 
-    expr  進入狀態 41
+    expr  進入狀態 42
 
 
 狀態 28
+
+   12 expr: expr '%' . expr
+
+    INTEGER   偏移，並進入狀態 1
+    VARIABLE  偏移，並進入狀態 10
+    '-'       偏移，並進入狀態 4
+    '!'       偏移，並進入狀態 5
+    '('       偏移，並進入狀態 6
+
+    expr  進入狀態 43
+
+
+狀態 29
 
     3 input: VARIABLE '=' expr .
     8 expr: expr . '+' expr
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     OR   偏移，並進入狀態 16
     AND  偏移，並進入狀態 17
@@ -509,45 +533,16 @@ expr (29)
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
     $預設  使用規則 3 以縮減 (input)
 
 
-狀態 29
-
-   20 expr: '(' expr ')' .
-
-    $預設  使用規則 20 以縮減 (expr)
-
-
 狀態 30
 
-    8 expr: expr . '+' expr
-    9     | expr . '-' expr
-   10     | expr . '*' expr
-   11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   15     | expr OR expr .
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   21 expr: '(' expr ')' .
 
-    GE   偏移，並進入狀態 18
-    LE   偏移，並進入狀態 19
-    EQ   偏移，並進入狀態 20
-    NE   偏移，並進入狀態 21
-    '>'  偏移，並進入狀態 22
-    '<'  偏移，並進入狀態 23
-    '+'  偏移，並進入狀態 24
-    '-'  偏移，並進入狀態 25
-    '*'  偏移，並進入狀態 26
-    '/'  偏移，並進入狀態 27
-
-    $預設  使用規則 15 以縮減 (expr)
+    $預設  使用規則 21 以縮減 (expr)
 
 
 狀態 31
@@ -556,15 +551,16 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   14     | expr AND expr .
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   16     | expr OR expr .
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     GE   偏移，並進入狀態 18
     LE   偏移，並進入狀態 19
@@ -576,8 +572,9 @@ expr (29)
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
-    $預設  使用規則 14 以縮減 (expr)
+    $預設  使用規則 16 以縮減 (expr)
 
 
 狀態 32
@@ -586,22 +583,30 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   16     | expr GE expr .
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   15     | expr AND expr .
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
+    GE   偏移，並進入狀態 18
+    LE   偏移，並進入狀態 19
+    EQ   偏移，並進入狀態 20
+    NE   偏移，並進入狀態 21
+    '>'  偏移，並進入狀態 22
+    '<'  偏移，並進入狀態 23
     '+'  偏移，並進入狀態 24
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
-    $預設  使用規則 16 以縮減 (expr)
+    $預設  使用規則 15 以縮減 (expr)
 
 
 狀態 33
@@ -610,20 +615,22 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   17     | expr LE expr .
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   17     | expr GE expr .
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     '+'  偏移，並進入狀態 24
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
     $預設  使用規則 17 以縮減 (expr)
 
@@ -634,22 +641,24 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
-   19     | expr EQ expr .
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   18     | expr LE expr .
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     '+'  偏移，並進入狀態 24
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
-    $預設  使用規則 19 以縮減 (expr)
+    $預設  使用規則 18 以縮減 (expr)
 
 
 狀態 35
@@ -658,22 +667,24 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   18     | expr NE expr .
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
+   20     | expr EQ expr .
 
     '+'  偏移，並進入狀態 24
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
-    $預設  使用規則 18 以縮減 (expr)
+    $預設  使用規則 20 以縮減 (expr)
 
 
 狀態 36
@@ -682,22 +693,24 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   13     | expr '>' expr .
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   19     | expr NE expr .
+   20     | expr . EQ expr
 
     '+'  偏移，並進入狀態 24
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
-    $預設  使用規則 13 以縮減 (expr)
+    $預設  使用規則 19 以縮減 (expr)
 
 
 狀態 37
@@ -706,85 +719,98 @@ expr (29)
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   12     | expr '<' expr .
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   14     | expr '>' expr .
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     '+'  偏移，並進入狀態 24
     '-'  偏移，並進入狀態 25
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
-    $預設  使用規則 12 以縮減 (expr)
+    $預設  使用規則 14 以縮減 (expr)
 
 
 狀態 38
+
+    8 expr: expr . '+' expr
+    9     | expr . '-' expr
+   10     | expr . '*' expr
+   11     | expr . '/' expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   13     | expr '<' expr .
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
+
+    '+'  偏移，並進入狀態 24
+    '-'  偏移，並進入狀態 25
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
+
+    $預設  使用規則 13 以縮減 (expr)
+
+
+狀態 39
 
     8 expr: expr . '+' expr
     8     | expr '+' expr .
     9     | expr . '-' expr
    10     | expr . '*' expr
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     '*'  偏移，並進入狀態 26
     '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
 
     $預設  使用規則 8 以縮減 (expr)
-
-
-狀態 39
-
-    8 expr: expr . '+' expr
-    9     | expr . '-' expr
-    9     | expr '-' expr .
-   10     | expr . '*' expr
-   11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
-
-    '*'  偏移，並進入狀態 26
-    '/'  偏移，並進入狀態 27
-
-    $預設  使用規則 9 以縮減 (expr)
 
 
 狀態 40
 
     8 expr: expr . '+' expr
     9     | expr . '-' expr
+    9     | expr '-' expr .
    10     | expr . '*' expr
-   10     | expr '*' expr .
    11     | expr . '/' expr
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
-    $預設  使用規則 10 以縮減 (expr)
+    '*'  偏移，並進入狀態 26
+    '/'  偏移，並進入狀態 27
+    '%'  偏移，並進入狀態 28
+
+    $預設  使用規則 9 以縮減 (expr)
 
 
 狀態 41
@@ -792,15 +818,56 @@ expr (29)
     8 expr: expr . '+' expr
     9     | expr . '-' expr
    10     | expr . '*' expr
+   10     | expr '*' expr .
+   11     | expr . '/' expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
+
+    $預設  使用規則 10 以縮減 (expr)
+
+
+狀態 42
+
+    8 expr: expr . '+' expr
+    9     | expr . '-' expr
+   10     | expr . '*' expr
    11     | expr . '/' expr
    11     | expr '/' expr .
-   12     | expr . '<' expr
-   13     | expr . '>' expr
-   14     | expr . AND expr
-   15     | expr . OR expr
-   16     | expr . GE expr
-   17     | expr . LE expr
-   18     | expr . NE expr
-   19     | expr . EQ expr
+   12     | expr . '%' expr
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
 
     $預設  使用規則 11 以縮減 (expr)
+
+
+狀態 43
+
+    8 expr: expr . '+' expr
+    9     | expr . '-' expr
+   10     | expr . '*' expr
+   11     | expr . '/' expr
+   12     | expr . '%' expr
+   12     | expr '%' expr .
+   13     | expr . '<' expr
+   14     | expr . '>' expr
+   15     | expr . AND expr
+   16     | expr . OR expr
+   17     | expr . GE expr
+   18     | expr . LE expr
+   19     | expr . NE expr
+   20     | expr . EQ expr
+
+    $預設  使用規則 12 以縮減 (expr)

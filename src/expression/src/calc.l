@@ -39,7 +39,7 @@ int arg1=0;                      //eval參數，取代未知變數
                 return INTEGER;
             }
 
-[-()<>=+*/;{}.!\n] {
+[-()<>=+*/%;{}.!\n] {
                 return *yytext;
              }
 [ \t]+        ;       /* ignore whitespace */
