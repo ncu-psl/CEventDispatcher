@@ -32,7 +32,7 @@
 %left OR AND
 %left GE LE EQ NE '>' '<'
 %left '+' '-'
-%left '*' '/'
+%left '*' '/' '%'
 %nonassoc '!'
 %nonassoc UMINUS
 
@@ -55,6 +55,7 @@ expr:
         | expr '-' expr         { $$ = opr('-', 2, $1, $3); }
         | expr '*' expr         { $$ = opr('*', 2, $1, $3); }
         | expr '/' expr         { $$ = opr('/', 2, $1, $3); }
+        | expr '%' expr         { $$ = opr('%', 2, $1, $3); }
         | expr '<' expr         { $$ = opr('<', 2, $1, $3); }
         | expr '>' expr         { $$ = opr('>', 2, $1, $3); }
         | expr AND expr         { $$ = opr(AND, 2, $1, $3); }
@@ -158,6 +159,7 @@ int ex(nodeType *p) {
         case '-':       return ex(p->opr.op[0]) -  ex(p->opr.op[1]);
         case '*':       return ex(p->opr.op[0]) *  ex(p->opr.op[1]);
         case '/':       return ex(p->opr.op[0]) /  ex(p->opr.op[1]);
+        case '%':       return ex(p->opr.op[0]) %  ex(p->opr.op[1]);
         case '<':       return ex(p->opr.op[0]) <  ex(p->opr.op[1]);
         case '>':       return ex(p->opr.op[0]) >  ex(p->opr.op[1]);
         case GE:        return ex(p->opr.op[0]) >= ex(p->opr.op[1]);
