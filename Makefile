@@ -4,7 +4,7 @@ ODIR=output
 
 EXPR= ./src/expression/output/calc.o ./src/expression/output/calc.tab.o
 
-libCED.a: expr CED.o
+libCED.a: expression CED.o
 	@echo 'Building: $@'
 	@ar -rcs $(ODIR)/libCED.a $(ODIR)/CED.o $(EXPR)
 
@@ -16,13 +16,25 @@ CED.o:
 	@echo 'Building: $@'
 	@$(CC) $(SRC)/CED.c -c -o $(ODIR)/CED.o
 
-expr:
+expression:
 	@echo 'Building: $@'
 	@$(MAKE) -C $(SRC)/expression
 
-ex_ncurses:
+ex1_KeyboardEvent:
 	@echo 'Building: $@'
-	@$(CC) ./example/ex_ncurses.c $(ODIR)/libCED.a -o $(ODIR)/ex_ncurses.exe -lncurses
+	@$(CC) ./example/ex1_KeyboardEvent.c $(ODIR)/libCED.a -o $(ODIR)/ex1_KeyboardEvent.exe -lncurses
+
+ex2_KeyboardCED:
+	@echo 'Building: $@'
+	@$(CC) ./example/ex2_KeyboardCED.c $(ODIR)/libCED.a -o $(ODIR)/ex2_KeyboardCED.exe -lncurses
+
+ex3_TrafficLight:
+	@echo 'Building: $@'
+	@$(CC) ./example/ex3_TrafficLight.c $(ODIR)/libCED.a -o $(ODIR)/ex3_TrafficLight.exe
+
+ex4_VendingMachine:
+	@echo 'Building: $@'
+	@$(CC) ./example/ex4_VendingMachine.c $(ODIR)/libCED.a -o $(ODIR)/ex4_VendingMachine.exe
 
 GetKeyboardState:
 	@echo 'Building: $@'
