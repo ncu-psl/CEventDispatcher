@@ -10,15 +10,13 @@ C Event Dispatcher
 #define max_size 10
 #define max_cond 50
 
-// typedef union {
-// 	void (*DFN0)();
-//  void (*DFN1)(int);
-// } DFN;
 typedef void (*DFN)();
 
-typedef struct{
-    DFN pfn;
-	char cond[max_cond];
+typedef struct
+{
+	DFN pfn;
+	char cond1[max_cond];
+	char cond2[max_cond];
 } EventProcessor_;
 typedef struct
 {
@@ -35,22 +33,26 @@ typedef struct
 */
 bool del(Dispatcher_ *dispatcher, DFN fn);
 bool add(Dispatcher_ *dispatcher, DFN fn, char *expr);
-bool run(Dispatcher_ *dispatcher, int array[]);
 bool add_(Dispatcher_ *dispatcher, DFN fn, char *expr);
+bool run(Dispatcher_ *dispatcher, int array[]);
 bool run_(Dispatcher_ *dispatcher, int n);
+bool add2(Dispatcher_ *dispatcher, DFN fn, char *expr1, char *expr2);
+bool add2_(Dispatcher_ *dispatcher, DFN fn, char *expr1, char *expr2);
+bool run2(Dispatcher_ *dispatcher, int arg1, int arg2);
 int testEval1(char *expr, int input);
 
-#define run(Dispatcher, array)                        \
+#define run(Dispatcher, array)                      \
 	do                                              \
 	{                                               \
 		int size = sizeof(array) / sizeof *(array); \
 		int i = 0;                                  \
 		for (i = 0; i < size; i++)                  \
 		{                                           \
-			run_(Dispatcher, array[i]);                \
+			run_(Dispatcher, array[i]);             \
 		}                                           \
 	} while (0)
 
 #define add(Dispatcher, DFN, expr) add_(Dispatcher, DFN, #expr)
+#define add2(Dispatcher, DFN, expr1, expr2) add2_(Dispatcher, DFN, #expr1, #expr2)
 
 #endif
