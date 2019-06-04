@@ -7,15 +7,15 @@ C Event Dispatcher
 #include <stdio.h>
 #include <string.h>
 
-bool add_(Handler_ *handler, DFN fn, char *expr)
+bool add_(Dispatcher_ *dispatcher, DFN fn, char *expr)
 {
-	if ((handler->n_pfn + 1) < max_size)
+	if ((dispatcher->n_pfn + 1) < max_size)
 	{
-        int n = handler->n_pfn;
-        handler->event[n].pfn = fn;
-		strcpy(handler->event[n].cond, expr);
-		handler->n_pfn++;
-		//printf("fn add1 %d\n", handler->n_pfn1);
+        int n = dispatcher->n_pfn;
+        dispatcher->EP[n].pfn = fn;
+		strcpy(dispatcher->EP[n].cond, expr);
+		dispatcher->n_pfn++;
+		//printf("fn add1 %d\n", dispatcher->n_pfn1);
 		return 1;
 	}
 	else
@@ -25,21 +25,21 @@ bool add_(Handler_ *handler, DFN fn, char *expr)
 	}
 }
 
-bool del(Handler_ *handler, DFN fn)
+bool del(Dispatcher_ *dispatcher, DFN fn)
 {
-	int i, n = handler->n_pfn;
+	int i, n = dispatcher->n_pfn;
 	bool finish = false;
 	for (i = 0; i < n; i++)
 	{
 		if (finish)
 		{
-			handler->event[i - 1] = handler->event[i];
+			dispatcher->EP[i - 1] = dispatcher->EP[i];
 		}
-		if (handler->event[i].pfn == fn)
+		if (dispatcher->EP[i].pfn == fn)
 		{
-			handler->event[i].pfn = NULL;
-			handler->event[i].cond[0] = '\0';
-			handler->n_pfn--;
+			dispatcher->EP[i].pfn = NULL;
+			dispatcher->EP[i].cond[0] = '\0';
+			dispatcher->n_pfn--;
 			finish = true;
 			// printf("fn del\n");
 		}
@@ -47,25 +47,25 @@ bool del(Handler_ *handler, DFN fn)
 	return finish;
 }
 
-bool run(Handler_ *handler)
+bool run(Dispatcher_ *dispatcher)
 {
 	int i;
-	for (i = 0; i < handler->n_pfn; i++)
+	for (i = 0; i < dispatcher->n_pfn; i++)
 	{
-		handler->event[i].pfn();
+		dispatcher->EP[i].pfn();
 	}
 
 	return 1;
 }
 
-bool run_(Handler_ *handler, int n)
+bool run_(Dispatcher_ *dispatcher, int n)
 {
 	int i;
-	for (i = 0; i < handler->n_pfn; i++)
+	for (i = 0; i < dispatcher->n_pfn; i++)
 	{
-	    // printf("\teval %s = %d \n", handler->cond[i], eval1(handler->cond[i], n));
-		if (eval1(handler->event[i].cond, n))
-			handler->event[i].pfn(n);
+	    // printf("\teval %s = %d \n", dispatcher->cond[i], eval1(dispatcher->cond[i], n));
+		if (eval1(dispatcher->EP[i].cond, n))
+			dispatcher->EP[i].pfn(n);
 	}
 
 	return 1;

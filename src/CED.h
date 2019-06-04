@@ -19,39 +19,39 @@ typedef void (*DFN)();
 typedef struct{
     DFN pfn;
 	char cond[max_cond];
-} Event_;
+} EventProcessor_;
 typedef struct
 {
 	int n_pfn;
-	Event_ event[max_size];
-} Handler_;
-#define Handler(name) Handler_ name = {.n_pfn = 0}
+	EventProcessor_ EP[max_size];
+} Dispatcher_;
+#define Dispatcher(name) Dispatcher_ name = {.n_pfn = 0}
 
 /*
-* run1：找出array中符合expr條件的元素，執行Handler
-* Handler：包含一個int參數的function形成的Handler
+* run1：找出array中符合expr條件的元素，執行Dispatcher
+* Dispatcher：包含一個int參數的function形成的Dispatcher
 * array：input陣列
 * add_, add1_：將 expr 轉換為string儲存
 */
-bool del(Handler_ *Handler, DFN fn);
-bool add(Handler_ *Handler, DFN fn, char *expr);
-bool run(Handler_ *Handler);
-bool run1(Handler_ *Handler, int array[]);
-bool add_(Handler_ *Handler, DFN fn, char *expr);
-bool run_(Handler_ *Handler, int n);
+bool del(Dispatcher_ *dispatcher, DFN fn);
+bool add(Dispatcher_ *dispatcher, DFN fn, char *expr);
+bool run(Dispatcher_ *dispatcher);
+bool run1(Dispatcher_ *dispatcher, int array[]);
+bool add_(Dispatcher_ *dispatcher, DFN fn, char *expr);
+bool run_(Dispatcher_ *dispatcher, int n);
 int testEval1(char *expr, int input);
 
-#define run1(Handler, array)                        \
+#define run1(Dispatcher, array)                        \
 	do                                              \
 	{                                               \
 		int size = sizeof(array) / sizeof *(array); \
 		int i = 0;                                  \
 		for (i = 0; i < size; i++)                  \
 		{                                           \
-			run_(Handler, array[i]);                \
+			run_(Dispatcher, array[i]);                \
 		}                                           \
 	} while (0)
 
-#define add(Handler, DFN, expr) add_(Handler, DFN, #expr)
+#define add(Dispatcher, DFN, expr) add_(Dispatcher, DFN, #expr)
 
 #endif
