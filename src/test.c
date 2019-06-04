@@ -16,24 +16,25 @@ int main(void)
 
     // test dispatcher add fn_A, fn_B
 	Dispatcher(dispatcher);
-	add(&dispatcher, fn_A,);
-	add(&dispatcher, fn_B,);
-	printf("test dispatcher add fn_A, fn_B\n");
-	run(&dispatcher);
+	add(&dispatcher, fn_A, x == 5);
+	add(&dispatcher, fn_B, x > 5);
+	printf("test dispatcher fn_A, fn_B with condition\n");
+	run(&dispatcher, array);
 	
+
     // test dispatcher del fn_A
     printf("test dispatcher del fn_A\n");
     del(&dispatcher, fn_A);
-    run(&dispatcher);
+    run(&dispatcher, array);
 
     // test dispatcher with condition expression
     Dispatcher(dispatcher1);
 	add(&dispatcher1, fn_C, x == 3 || x == 7);
 	add(&dispatcher1, fn_D, x == 'a' || x == 3);
 	printf("test dispatcher with condition expression input x=3 \n");
-	run1(&dispatcher1, x);
+	run(&dispatcher1, x);
 	printf("test dispatcher with condition expression input array={0, 1, 2, 3, 4, 5, 6, 7, 8, 'a'} \n");
-	run1(&dispatcher1, array);
+	run(&dispatcher1, array);
 
 	return 0;
 }

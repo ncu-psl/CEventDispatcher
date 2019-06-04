@@ -47,17 +47,6 @@ bool del(Dispatcher_ *dispatcher, DFN fn)
 	return finish;
 }
 
-bool run(Dispatcher_ *dispatcher)
-{
-	int i;
-	for (i = 0; i < dispatcher->n_pfn; i++)
-	{
-		dispatcher->EP[i].pfn();
-	}
-
-	return 1;
-}
-
 bool run_(Dispatcher_ *dispatcher, int n)
 {
 	int i;

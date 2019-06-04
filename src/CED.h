@@ -1,11 +1,11 @@
 /*
 C Event Dispatcher
 */
-#ifndef CED_H
-#define CED_H
-
 #include <stdbool.h>
 #include <stdio.h>
+
+#ifndef CED_H
+#define CED_H
 
 #define max_size 10
 #define max_cond 50
@@ -28,20 +28,19 @@ typedef struct
 #define Dispatcher(name) Dispatcher_ name = {.n_pfn = 0}
 
 /*
-* run1：找出array中符合expr條件的元素，執行Dispatcher
+* run：找出array中符合expr條件的元素，執行Dispatcher
 * Dispatcher：包含一個int參數的function形成的Dispatcher
 * array：input陣列
 * add_, add1_：將 expr 轉換為string儲存
 */
 bool del(Dispatcher_ *dispatcher, DFN fn);
 bool add(Dispatcher_ *dispatcher, DFN fn, char *expr);
-bool run(Dispatcher_ *dispatcher);
-bool run1(Dispatcher_ *dispatcher, int array[]);
+bool run(Dispatcher_ *dispatcher, int array[]);
 bool add_(Dispatcher_ *dispatcher, DFN fn, char *expr);
 bool run_(Dispatcher_ *dispatcher, int n);
 int testEval1(char *expr, int input);
 
-#define run1(Dispatcher, array)                        \
+#define run(Dispatcher, array)                        \
 	do                                              \
 	{                                               \
 		int size = sizeof(array) / sizeof *(array); \
