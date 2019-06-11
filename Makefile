@@ -36,6 +36,17 @@ ex4_VendingMachine:
 	@echo 'Building: $@'
 	@$(CC) ./example/ex4_VendingMachine.c $(ODIR)/libCED.a -o $(ODIR)/ex4_VendingMachine.exe
 
+ex5:
+	@echo 'Building: $@'
+	@$(CC) -c ./example/ex5/E_Insert_coin.c -o $(ODIR)/ex5/E_Insert_coin.o
+	@$(CC) -c ./example/ex5/E_Select_option.c -o $(ODIR)/ex5/E_Select_option.o
+	@$(CC) -c ./example/ex5/E_Coffee_ready.c -o $(ODIR)/ex5/E_Coffee_ready.o
+	@$(CC) -c ./example/ex5/VenderSubscribe.c -o $(ODIR)/ex5/VenderSubscribe.o
+	@$(CC) ./example/ex5/ex5_VendingMachine2.c -o $(ODIR)/ex5/ex5_VendingMachine2.exe \
+	$(ODIR)/ex5/VenderSubscribe.o $(ODIR)/ex5/E_Insert_coin.o $(ODIR)/ex5/E_Select_option.o $(ODIR)/ex5/E_Coffee_ready.o \
+	$(ODIR)/libCED.a
+
+
 GetKeyboardState:
 	@echo 'Building: $@'
 	@$(CC) ./example/GetKeyboardState.c $(ODIR)/libCED.a -o $(ODIR)/GetKeyboardState.exe

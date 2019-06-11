@@ -2,9 +2,9 @@
 Example 2
 Using CED to handle Keyboard input
 */
-#include <stdio.h>
-#include <ncurses.h>
 #include "../src/CED.h"
+#include <ncurses.h>
+#include <stdio.h>
 
 void KeyboardInput_Subscriber();
 void KeyboardInput_Dispatcher();
@@ -15,8 +15,8 @@ void Attack();
 
 void initial()
 {
-	initscr(); // Initialize curse scheme
-	noecho(); // No echo in curse
+	initscr();			   // Initialize curse scheme
+	noecho();			   // No echo in curse
 	nodelay(stdscr, TRUE); // work in a non-blocking manner
 	// keypad(stdscr, TRUE); // Using special keys
 	refresh(); // Update the screen
@@ -25,8 +25,8 @@ void initial()
 int main()
 {
 	initial();
-    KeyboardInput_Subscriber();
-    KeyboardInput_Dispatcher();
+	KeyboardInput_Subscriber();
+	KeyboardInput_Dispatcher();
 	return 0;
 }
 
@@ -34,33 +34,37 @@ int main()
 
 Dispatcher(keyboardInput);
 
-void KeyboardInput_Subscriber(){
-    add(&keyboardInput, Move, ch=='a'||ch=='s'||ch=='d'||ch=='w');
-    add(&keyboardInput, Run, ch=='r');
-    add(&keyboardInput, Attack, ch=='j');
+void KeyboardInput_Subscribe()
+{
+	add(&keyboardInput, Move, ch == 'a' || ch == 's' || ch == 'd' || ch == 'w');
+	add(&keyboardInput, Run, ch == 'r');
+	add(&keyboardInput, Attack, ch == 'j');
 }
-void KeyboardInput_Dispatcher(){
-    int ch[1]={0};
-    do{
-		if ((ch[0] = getch()) == ERR){
+void KeyboardInput_Dispatcher()
+{
+	int ch[1] = {0};
+	do
+	{
+		if ((ch[0] = getch()) == ERR)
+		{
+		}
+		else
+		{
+			clear();
+			run(&keyboardInput, ch);
+			refresh();
+		}
 
-        }
-        else{
-            clear();
-            run(&keyboardInput, ch);
-    		refresh();
-        }        
-        
-    }while(ch[0]!='q');
-    getchar();
+	} while (ch[0] != 'q');
+	getchar();
 	endwin();
 }
 
 void Move(int direct)
 {
 	printw("%d Move ", direct);
-	
-    switch (direct)
+
+	switch (direct)
 	{
 	case 'a':
 		printw("left");
@@ -75,11 +79,11 @@ void Move(int direct)
 		printw("up");
 		break;
 	}
-    printw("\n");
+	printw("\n");
 }
 void Run()
 {
-    printw("Run\n");
+	printw("Run\n");
 }
 
 void Attack()
