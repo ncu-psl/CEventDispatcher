@@ -20,7 +20,7 @@ int arg1=0;                      //eval參數，取代未知變數
 "else"          return ELSE;
 "print"         return PRINT;
 
-'[a-z]'     {
+'[A-Za-z]'     {
                 yylval.iValue = (int)yytext[1];
                 return INTEGER;
             }
