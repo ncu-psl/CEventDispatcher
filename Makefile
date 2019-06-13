@@ -14,30 +14,32 @@ test: libCED.a
 
 CED.o:
 	@echo 'Building: $@'
+	@mkdir -p $(ODIR)
 	@$(CC) $(SRC)/CED.c -c -o $(ODIR)/CED.o
 
 expression:
 	@echo 'Building: $@'
 	@$(MAKE) -C $(SRC)/expression
 
-ex1_KeyboardEvent:
+ex1_KeyboardEvent: libCED.a
 	@echo 'Building: $@'
 	@$(CC) ./example/ex1_KeyboardEvent.c $(ODIR)/libCED.a -o $(ODIR)/ex1_KeyboardEvent.exe -lncurses
 
-ex2_KeyboardCED:
+ex2_KeyboardCED: libCED.a
 	@echo 'Building: $@'
 	@$(CC) ./example/ex2_KeyboardCED.c $(ODIR)/libCED.a -o $(ODIR)/ex2_KeyboardCED.exe -lncurses
 
-ex3_TrafficLight:
+ex3_TrafficLight: libCED.a
 	@echo 'Building: $@'
 	@$(CC) ./example/ex3_TrafficLight.c $(ODIR)/libCED.a -o $(ODIR)/ex3_TrafficLight.exe
 
-ex4_VendingMachine:
+ex4_VendingMachine: libCED.a
 	@echo 'Building: $@'
 	@$(CC) ./example/ex4_VendingMachine.c $(ODIR)/libCED.a -o $(ODIR)/ex4_VendingMachine.exe
 
-ex5:
+ex5: libCED.a
 	@echo 'Building: $@'
+	@mkdir -p $(ODIR)/ex5
 	@$(CC) -c ./example/ex5/E_Insert_coin.c -o $(ODIR)/ex5/E_Insert_coin.o
 	@$(CC) -c ./example/ex5/E_Select_option.c -o $(ODIR)/ex5/E_Select_option.o
 	@$(CC) -c ./example/ex5/E_Coffee_ready.c -o $(ODIR)/ex5/E_Coffee_ready.o
@@ -46,7 +48,11 @@ ex5:
 	$(ODIR)/ex5/VenderSubscribe.o $(ODIR)/ex5/E_Insert_coin.o $(ODIR)/ex5/E_Select_option.o $(ODIR)/ex5/E_Coffee_ready.o \
 	$(ODIR)/libCED.a
 
-
+ex_FSM:
+	@echo 'Building: $@'
+	@$(CC) ./example/FSM_If-else.c -o $(ODIR)/FSM_If-else.exe
+	@$(CC) ./example/FSM_Arraytable.c -o $(ODIR)/FSM_Arraytable.exe
+	
 GetKeyboardState:
 	@echo 'Building: $@'
 	@$(CC) ./example/GetKeyboardState.c $(ODIR)/libCED.a -o $(ODIR)/GetKeyboardState.exe
