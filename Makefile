@@ -33,11 +33,11 @@ ex3_TrafficLight: libCED.a
 	@echo 'Building: $@'
 	@$(CC) ./example/ex3_TrafficLight.c $(ODIR)/libCED.a -o $(ODIR)/ex3_TrafficLight.exe
 
-ex4_VendingMachine: libCED.a
+ex4_VendingMachine1: libCED.a
 	@echo 'Building: $@'
 	@$(CC) ./example/ex4_VendingMachine.c $(ODIR)/libCED.a -o $(ODIR)/ex4_VendingMachine.exe
 
-ex5: libCED.a
+ex5_VendingMachine2: libCED.a
 	@echo 'Building: $@'
 	@mkdir -p $(ODIR)/ex5
 	@$(CC) -c ./example/ex5/E_Insert_coin.c -o $(ODIR)/ex5/E_Insert_coin.o
