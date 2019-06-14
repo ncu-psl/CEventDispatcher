@@ -17,7 +17,7 @@ C Event Dispatcher 是一個C語言事件驅動程式設計輔助工具，提供
 
 ## 如何建置
 
-``` sh
+``` cmd
 # 建立專案資料夾
 mkdir CEventDispatcher
 cd CEventDispatcher
