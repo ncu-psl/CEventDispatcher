@@ -18,13 +18,11 @@ C Event Dispatcher 是一個C語言事件驅動程式設計輔助工具，提供
 ## 如何建置
 
 ``` sh
-# 建立專案資料夾
-mkdir CEventDispatcher
-cd CEventDispatcher
 git clone git@github.com:ncu-psl/CEventDispatcher.git
 
 # 建立 C Event Dispatcher 工具 libCED.a
 # 建立的 libaray 目標位置：CEventDispatcher/output
+cd CEventDispatcher
 make
 
 # 使用 GCC 編譯自己的程式
